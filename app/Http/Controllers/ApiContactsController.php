@@ -14,8 +14,8 @@ use App\Http\Requests\ContactRequest;
 
 class ApiContactsController extends Controller
 {
-    public function index(){
-
+    public function index()
+    {
         return contact::latest('fname')->get();
     }
     public function show(contact $contact_show)
@@ -83,6 +83,11 @@ class ApiContactsController extends Controller
             'all_requests'
         ));
 
+    }
+    public function destroy(contact $contact)
+    {
+        $contact->delete();
+        return "success";
     }
 
 }
