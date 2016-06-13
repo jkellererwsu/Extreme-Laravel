@@ -68,6 +68,8 @@ class ApiContactsController extends Controller
         $request->request->add(['church_id' => Auth::user()->church_id]);
         $all_requests = $request->all();
         $contact = Auth::user()->contacts()->create($request->all());
+        $position_array = explode( ',',$request->input('position_list'));
+        $this->syncAttr($contact, $position_array);
         return response()->json(compact(
             'all_requests',
             'contact'
@@ -78,6 +80,7 @@ class ApiContactsController extends Controller
     {
         $all_requests = $request->all();
         $contact->update($request->all());
+        $this->syncAttr($contact, $request->input('position_list'));
         return response()->json(compact(
            'contact',
             'all_requests'
@@ -89,5 +92,15 @@ class ApiContactsController extends Controller
         $contact->delete();
         return "success";
     }
+
+    private function syncAttr(contact $contact, array $positions)
+    {
+        $allPositionIds = array();
+        foreach ($positions as $position) {
+            $allPositionIds[] = $position;
+        }
+       $contact->positions()->sync($allPositionIds);
+    }
+
 
 }

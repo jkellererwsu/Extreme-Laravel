@@ -65,7 +65,6 @@ class ContactsController extends Controller
     }
     public function update(contact $contact, ContactRequest $request)
     {
-        dd($request->all());
         //$contact = contact::findOrFail($id);
         $contact->update($request->all());
 
@@ -111,7 +110,6 @@ class ContactsController extends Controller
     {
         $request->request->add(['church_id' => Auth::user()->church_id]);
         $contact = Auth::user()->contacts()->create($request->all());
-
         $taglist = $request->input('tag_list');
 
         if(count($request->input('tag_list')) == 0) {
