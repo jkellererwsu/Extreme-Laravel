@@ -62,12 +62,8 @@ $api->version('v1', function ($api) {
         // Endpoints registered here will have the "foo" middleware applied.
         $api->GET('validate_token','App\Http\Controllers\AuthenticateController@validateToken');
         $api->GET('contacts/create','App\Http\Controllers\ApiContactsController@create');
-        /*$api->GET('contacts','App\Http\Controllers\ApiContactsController@index');
-        $api->POST('contacts','App\Http\Controllers\ApiContactsController@store');
-        $api->GET('contacts/{contacts}','App\Http\Controllers\ApiContactsController@show');
-        $api->PATCH('contacts/{contacts}','App\Http\Controllers\ApiContactsController@update');
-        $api->DELETE('contacts/{contacts}','App\Http\Controllers\ApiContactsController@destroy');*/
         $api->resource('contacts','App\Http\Controllers\ApiContactsController');
+        $api->GET('groups/create','App\Http\Controllers\ApiGroupsController@create');
         $api->resource('groups','App\Http\Controllers\ApiGroupsController');
 
     });
