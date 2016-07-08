@@ -64,6 +64,8 @@ $api->version('v1', function ($api) {
         $api->GET('contacts/create','App\Http\Controllers\ApiContactsController@create');
         $api->resource('contacts','App\Http\Controllers\ApiContactsController');
         $api->GET('groups/create','App\Http\Controllers\ApiGroupsController@create');
+        $api->GET('groups/createattend/{groups}','App\Http\Controllers\ApiGroupsController@createAttend');
+        $api->POST('groups/createattend','App\Http\Controllers\ApiGroupsController@saveAttend');
         $api->resource('groups','App\Http\Controllers\ApiGroupsController');
 
     });

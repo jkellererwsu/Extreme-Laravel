@@ -12,8 +12,15 @@ use App\Http\Requests;
 class ApiGroupsController extends Controller
 {
     public function index(){
-
-        return Group::latest('name')->get();
+        $groups = Group::get()->all();
+        $leaders = contact::Onlyposition(0, 1)->get()->all();
+        foreach($leaders as $leader){
+            $leader->follower;
+        }
+        return response()->json(compact(
+            'groups',
+            'leaders'
+        ));
     }
     public function show(Group $group)
     {
@@ -22,6 +29,7 @@ class ApiGroupsController extends Controller
         $host = $group->host;
         $timothy = $group->timothy;
         $contacts = $group->contact;
+        $allcontacts = contact::get()->all();
         $attendance = $group->contacts;
         $attendance_mod =[];
         foreach($attendance as $item){
@@ -38,7 +46,34 @@ class ApiGroupsController extends Controller
             'host',
             'timothy',
             'contacts',
+            'allcontacts',
             'attendance_mod'
+        ));
+
+    }
+    public function createAttend(Group $group)
+    {
+        $groups = Group::get()->all();
+        $contacts = $group->contact;
+        $allcontacts = contact::get()->all();
+
+        return response()->json(compact(
+            'groups',
+            'allcontacts',
+            'contacts'
+        ));
+
+    }
+    public function saveAttend(Request $request)
+    {
+        $all_requests = $request->all();
+        $contact_array = explode( ',',$all_requests['contacts']);
+        $group = Group::findorfail($all_requests['groupid']);
+        foreach($contact_array as $contact){
+            $group->contacts()->attach([ $contact =>['date'=> $all_requests['date'], 'note'=> $all_requests['note']]]);
+        }
+        return response()->json(compact(
+            'all_requests'
         ));
 
     }
