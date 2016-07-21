@@ -71,6 +71,9 @@ $api->version('v1', function ($api) {
         $api->GET('events/createattend/{events}','App\Http\Controllers\ApiEventsController@createAttend');
         $api->POST('events/createattend','App\Http\Controllers\ApiEventsController@saveAttend');
         $api->resource('events','App\Http\Controllers\ApiEventsController');
+        $api->GET('trainings/createattend/{trainings}','App\Http\Controllers\ApiTrainingsController@createAttend');
+        $api->POST('trainings/createattend','App\Http\Controllers\ApiTrainingsController@saveAttend');
+        $api->resource('trainings','App\Http\Controllers\ApiTrainingsController');
 
     });
 
