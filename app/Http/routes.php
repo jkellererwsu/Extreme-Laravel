@@ -67,6 +67,10 @@ $api->version('v1', function ($api) {
         $api->GET('groups/createattend/{groups}','App\Http\Controllers\ApiGroupsController@createAttend');
         $api->POST('groups/createattend','App\Http\Controllers\ApiGroupsController@saveAttend');
         $api->resource('groups','App\Http\Controllers\ApiGroupsController');
+        $api->GET('events/create','App\Http\Controllers\ApiEventsController@create');
+        $api->GET('events/createattend/{events}','App\Http\Controllers\ApiEventsController@createAttend');
+        $api->POST('events/createattend','App\Http\Controllers\ApiEventsController@saveAttend');
+        $api->resource('events','App\Http\Controllers\ApiEventsController');
 
     });
 
