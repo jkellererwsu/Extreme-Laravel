@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\church;
 use JWTAuth;
 use API;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -33,5 +34,14 @@ class AuthenticateController extends Controller
 
     public function validateToken(){
         return API::response()->array(['status' => 'success'])->statusCode(200);
+    }
+
+    public function regForm(){
+        $churches = church::lists('name', 'id');
+        return compact('churches');
+    }
+    public function regCreate(Request $request){
+        $all_requests = $request->all();
+        return compact('all_requests');
     }
 }

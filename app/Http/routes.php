@@ -25,6 +25,11 @@
 | kernel and includes session state, CSRF protection, and more.
 |
 */
+header('Access-Control-Allow-Origin:*');
+
+header('Access-Control-Allow-Methods:GET, POST, PUT, DELETE, OPTIONS');
+
+header('Access-Control-Allow-Headers:Origin, Content-Type, Accept, Authorization, X-Requested-With');
 $api = app('Dingo\Api\Routing\Router');
 
 Route::group(['middleware' => ['web']], function () {
@@ -81,5 +86,7 @@ $api->version('v1', function ($api) {
     });
 
     $api->POST('login','App\Http\Controllers\AuthenticateController@authenticate');
+    $api->get('register','App\Http\Controllers\AuthenticateController@regForm');
+    $api->POST('register','App\Http\Controllers\AuthenticateController@regCreate');
 
 });
