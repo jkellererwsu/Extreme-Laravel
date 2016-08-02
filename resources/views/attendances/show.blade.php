@@ -12,7 +12,7 @@
                     <div class="col-xs-12 col-sm-4 emphasis text-center">
                         <h2><strong> {{$attendance->adults + $attendance->kids + $attendance->extremies}} </strong></h2>
                         <p><small>total attendance</small></p>
-                        <h2><strong> {{$attendance->offering+ $attendance->tithe +$attendance->offering}} </strong></h2>
+                        <h2><strong> {{$attendance->offering+ $attendance->tithe +$attendance->other_income}} </strong></h2>
                         <p><small>total donations</small></p>
                     </div>
                     <div class="col-sm-6">
