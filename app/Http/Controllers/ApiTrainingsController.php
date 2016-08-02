@@ -14,48 +14,38 @@ class ApiTrainingsController extends Controller
 {
     public function index(){
         $trainings = Training::get()->all();
+        foreach ($trainings as $train){
+            $train->contacts;
+        }
         return response()->json(compact(
             'trainings'
         ));
     }
-    public function show(Group $group)
+    public function show(Training $train)
     {
-        $member_count = count($group->leader->follower);
-        $leader = $group->leader;
-        $host = $group->host;
-        $timothy = $group->timothy;
-        $contacts = $group->contact;
-        $allcontacts = contact::get()->all();
-        $attendance = $group->contacts;
+        $train_count = count($train->contacts);
         $attendance_mod =[];
-        foreach($attendance as $item){
-            if ($group->id = $item->pivot->group_id){
+        foreach($train->contacts as $item){
+            if ($train->id = $item->pivot->training_id){
             $item->pivot->full_name = $item->full_name;
                 $attendance_mod[]=($item->pivot);
             }
     }
 
         return response()->json(compact(
-            'group',
-            'member_count',
-            'leader',
-            'host',
-            'timothy',
-            'contacts',
-            'allcontacts',
+            'train',
+            'train_count',
             'attendance_mod'
         ));
 
     }
-    public function createAttend(Group $group)
+    public function createAttend(Training $train)
     {
-        $groups = Group::get()->all();
-        $contacts = $group->contact;
-        $allcontacts = contact::get()->all();
+        $trainings = Training::get()->all();
+        $contacts = contact::get()->all();
 
         return response()->json(compact(
-            'groups',
-            'allcontacts',
+            'trainings',
             'contacts'
         ));
 
@@ -64,9 +54,9 @@ class ApiTrainingsController extends Controller
     {
         $all_requests = $request->all();
         $contact_array = explode( ',',$all_requests['contacts']);
-        $group = Group::findorfail($all_requests['groupid']);
+        $train = Training::findorfail($all_requests['trainid']);
         foreach($contact_array as $contact){
-            $group->contacts()->attach([ $contact =>['date'=> $all_requests['date'], 'note'=> $all_requests['note']]]);
+            $train->contacts()->attach([ $contact =>['date'=> $all_requests['date'], 'note'=> $all_requests['note']]]);
         }
         return response()->json(compact(
             'all_requests'
