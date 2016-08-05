@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class HomeController extends Controller
 {
@@ -26,6 +28,13 @@ class HomeController extends Controller
     public function about()
     {
         return view('pages.about');
+
+    }
+
+    public function addper(){
+
+
+        Return "NO NO";
 
     }
 }

@@ -24,6 +24,8 @@
                 <li><a href="{{ url('/events') }}">Eventos</a></li>
                 <li><a href="{{ url('/services') }}">Services</a>
                 <li><a href="{{ url('/trainings') }}">Trainings</a></li>
+                <li><a href="{{ url('/manage') }}">Manage</a></li>
+
             </ul>
 
             <!-- Right Side Of Navbar -->

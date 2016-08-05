@@ -35,6 +35,7 @@ $api = app('Dingo\Api\Routing\Router');
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', 'HomeController@index');
     Route::auth();
+    Route::get('/addper','HomeController@addper');
 
     Route::group(['middleware' => ['auth']], function () {
         Route::get('tags/{tags}','TagsController@show');
@@ -57,6 +58,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('trainings','TrainingsController');
         Route::Patch('trainings/{trainings}/addcontacts','TrainingsController@addContacts');
         Route::Delete('trainings/{trainings}/deletecontacts','TrainingsController@deleteContacts');
+        Route::resource('manage','ManageController');
 
     });
 

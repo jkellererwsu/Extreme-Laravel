@@ -9,7 +9,8 @@
         "laravel/framework": "5.2.*",
         "laravelcollective/html": "~5.1",
         "dingo/api":"1.0.*@dev",
-        "tymon/jwt-auth": "0.5.*"
+        "tymon/jwt-auth": "0.5.*",
+        "spatie/laravel-permission": "^1.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
